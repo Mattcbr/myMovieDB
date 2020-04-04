@@ -20,6 +20,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
+    @IBOutlet weak var ratingsStackView: UIStackView!
     @IBOutlet weak var IMDBRatingView: UIView!
     @IBOutlet weak var IMDBRatingLabel: UILabel!
     @IBOutlet weak var RTRatingView: UIView!
@@ -77,10 +78,6 @@ class MovieDetailsViewController: UIViewController {
         movieDirectorsLabel.numberOfLines = 0
         movieDirectorsLabel.sizeToFit()
         
-        movieRatingsLabel.text = "Available Ratings"
-        movieRatingsLabel.numberOfLines = 0
-        movieRatingsLabel.sizeToFit()
-        
         movieDescriptionLabel.text = movie.Plot
         movieDescriptionLabel.numberOfLines = 0
         movieDescriptionLabel.sizeToFit()
@@ -116,6 +113,11 @@ class MovieDetailsViewController: UIViewController {
                 print("Other Rating Found: \(rating.Source)")
             }
         }
+        let isAnyHatingAvailable = !IMDBRatingView.isHidden || !MCRatingView.isHidden || !RTRatingView.isHidden
+        ratingsStackView.isHidden = !isAnyHatingAvailable
+        movieRatingsLabel.text = isAnyHatingAvailable ? "Available Rating(s):" : "No Rating Available"
+        movieRatingsLabel.numberOfLines = 0
+        movieRatingsLabel.sizeToFit()
     }
     
     func hideRatingViews(){

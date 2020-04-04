@@ -355,6 +355,7 @@
                         <outlet property="movieRatingsLabel" destination="ZhX-7n-Lth" id="Nmb-1y-x8I"/>
                         <outlet property="movieTitleLabel" destination="3jW-lA-Vpm" id="iXv-47-Ima"/>
                         <outlet property="movieYearLabel" destination="5tX-Hq-LTe" id="BWZ-xl-5gh"/>
+                        <outlet property="ratingsStackView" destination="2ZN-AH-5Z1" id="GeS-1I-fvy"/>
                         <outlet property="scrollView" destination="xiF-OV-gTK" id="D3a-Ff-hj2"/>
                     </connections>
                 </viewController>
