@@ -15,7 +15,7 @@ import RxCocoa
 class RequestManager {
     static let sharedInstance = RequestManager()
     let apiKey = "561efb6a"
-    let MoviesList: BehaviorRelay <[Movie]> = BehaviorRelay(value:[])
+    let moviesList: BehaviorRelay <[Movie]> = BehaviorRelay(value:[])
     let detailedMovie: BehaviorRelay <DetailedMovie?> = BehaviorRelay(value: nil)
     var imagesDict: [String: UIImage] = [:]
     
@@ -32,8 +32,8 @@ class RequestManager {
                     let decoder = JSONDecoder()
                     let searchResults = try decoder.decode(SearchResults.self, from: data)
                     print("Got Movie")
-                    let newValue = self.MoviesList.value + searchResults.Search
-                    self.MoviesList.accept(newValue)
+                    let newValue = self.moviesList.value + searchResults.Search
+                    self.moviesList.accept(newValue)
                 } catch let error {
                     print(error)
                 }
@@ -84,5 +84,15 @@ class RequestManager {
                 }
             }
         }
+    }
+    
+    //MARK: Reset
+    func resetMoviesList() {
+        moviesList.accept([])
+        resetSelectedMovie()
+    }
+    
+    func resetSelectedMovie() {
+        detailedMovie.accept(nil)
     }
 }

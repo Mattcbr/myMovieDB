@@ -10,6 +10,7 @@ import Foundation
 
 class SearchViewPresenter {
     var controller: SearchViewController
+    var sharedRequestManager = RequestManager.sharedInstance
     
     init(controller: SearchViewController) {
         self.controller = controller
@@ -18,7 +19,7 @@ class SearchViewPresenter {
     func searchForMovie(withTitle title: String){
         if(self.isTextValid(text: title)){
             let sanitizedString = sanitizeString(text: title)
-            RequestManager.sharedInstance.requestMovies(withTitle: sanitizedString)
+            sharedRequestManager.requestMovies(withTitle: sanitizedString)
             controller.goToResultsScreen()
         } else {
             controller.shouldShowErrorLabel(status: true)
@@ -32,5 +33,9 @@ class SearchViewPresenter {
     
     func sanitizeString(text: String) -> String {
         return text.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    func resetMoviesList(){
+        sharedRequestManager.resetMoviesList()
     }
 }

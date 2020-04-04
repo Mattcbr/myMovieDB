@@ -24,9 +24,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchButton.isEnabled = false
         searchButton.layer.cornerRadius = 10
-        
-        shouldShowErrorLabel(status: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        shouldShowErrorLabel(status: false)
+        self.presenter?.resetMoviesList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.movieSearchBar.text = ""
+        self.movieSearchBar.endEditing(true)
     }
     
     //MARK: Search Bar Delegate

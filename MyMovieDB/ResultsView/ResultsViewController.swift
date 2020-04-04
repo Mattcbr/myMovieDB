@@ -24,14 +24,17 @@ class ResultsViewController: UICollectionViewController {
         
         presenter = ResultsViewPresenter(controller: self)
         setupMoviesObserver()
-//        setupCellConfiguration()
-//        setupCellTapHandling()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        presenter?.resetDetailedMovie()
     }
     
     //MARK: RX
     func setupMoviesObserver(){
-        RequestManager.sharedInstance.MoviesList.asObservable()
+        RequestManager.sharedInstance.moviesList.asObservable()
             .subscribe(onNext: {
                 [unowned self] movies in
                 self.moviesList = movies
@@ -92,6 +95,7 @@ class ResultsViewController: UICollectionViewController {
         self.presenter?.didSelectMovie(movie: selectedMovie)
     }
     
+    //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "movieDetailsSegue"){
             guard let destinationVc = segue.destination as? MovieDetailsViewController else {return}

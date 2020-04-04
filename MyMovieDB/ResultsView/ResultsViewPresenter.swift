@@ -37,4 +37,8 @@ class ResultsViewPresenter {
             }
         }).disposed(by: disposeBag)
     }
+    
+    func resetDetailedMovie(){
+        sharedRequestManager.resetSelectedMovie()
+    }
 }
