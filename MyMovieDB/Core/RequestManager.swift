@@ -69,7 +69,12 @@ class RequestManager {
     }
     
     func requestImage(forMovie movie: Movie, completion: @escaping (_ image: UIImage) -> Void) {
-        if let image = imagesDict[movie.imdbID] {
+        if (movie.Poster == "N/A") {
+            let defaultImage = UIImage(named: "appIconDefault")
+            if let image = defaultImage {
+                completion(image)
+            }
+        } else if let image = imagesDict[movie.imdbID] {
             completion(image)
         } else {
             Alamofire.request(movie.Poster).responseImage { response in

@@ -31,17 +31,9 @@ class MovieDetailsViewController: UIViewController {
     var presenter: MovieDetailsPresenter?
     var sharedRequestManager = RequestManager.sharedInstance
     var detailedMovie: DetailedMovie?
-        /*didSet {
-            if let movie = detailedMovie {
-                setup(forMovie: movie)
-            }
-        }*/
-    
     
     init(){
         super.init(nibName: nil, bundle: nil)
-        
-//        self.presenter = MovieDetailsPresenter(controller: self)
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +41,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        //Do loader, blur and else here
+        //TODO: Do loader, blur and else here
         super.viewDidLoad()
         self.presenter = MovieDetailsPresenter(controller: self)
         if let movie = detailedMovie{
@@ -85,7 +77,11 @@ class MovieDetailsViewController: UIViewController {
     
     func setupImage(){
         if let movieID = detailedMovie?.imdbID{
-            self.moviePosterImageView.image = sharedRequestManager.imagesDict[movieID]
+            if let moviePoster = sharedRequestManager.imagesDict[movieID] {
+                self.moviePosterImageView.image = moviePoster
+            } else {
+                self.moviePosterImageView.image = UIImage(named: "appIconDefault")
+            }
         }
     }
     
