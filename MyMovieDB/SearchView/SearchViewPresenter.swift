@@ -16,9 +16,11 @@ class SearchViewPresenter {
     }
     
     func searchForMovie(withTitle title: String){
-        let sanitizedString = sanitizeString(text: title)
-        RequestManager.sharedInstance.requestMovies(withTitle: sanitizedString)
-        controller.goToResultsScreen()
+        if(self.isTextValid(text: title)){
+            let sanitizedString = sanitizeString(text: title)
+            RequestManager.sharedInstance.requestMovies(withTitle: sanitizedString)
+            controller.goToResultsScreen()
+        }
     }
     
     func isTextValid(text: String) -> Bool {
