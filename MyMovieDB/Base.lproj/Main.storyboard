@@ -98,20 +98,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search for a movie, tv series..." translatesAutoresizingMaskIntoConstraints="NO" id="j9y-Le-GGG">
+                            <searchBar contentMode="redraw" placeholder="Search for a movie, tv show..." translatesAutoresizingMaskIntoConstraints="NO" id="j9y-Le-GGG">
                                 <rect key="frame" x="0.0" y="400.5" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIconDefault" translatesAutoresizingMaskIntoConstraints="NO" id="00z-dz-ePF">
-                                <rect key="frame" x="107" y="165" width="200" height="200"/>
+                                <rect key="frame" x="107" y="164.5" width="200" height="200"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syd-pC-scz">
+                                <rect key="frame" x="124" y="472.5" width="166" height="34"/>
+                                <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressSearchButton:" destination="ulS-Pf-3bI" eventType="touchUpInside" id="X5l-CO-mDf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="centerY" secondItem="hn6-c3-htv" secondAttribute="centerY" id="2g2-FR-rQH"/>
-                            <constraint firstItem="j9y-Le-GGG" firstAttribute="top" secondItem="00z-dz-ePF" secondAttribute="bottom" constant="35.5" id="Jrx-be-y6l"/>
+                            <constraint firstItem="Syd-pC-scz" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="Fzn-gi-3Jf"/>
+                            <constraint firstItem="j9y-Le-GGG" firstAttribute="top" secondItem="00z-dz-ePF" secondAttribute="bottom" constant="36" id="Jrx-be-y6l"/>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="R4a-AV-EkL"/>
+                            <constraint firstItem="Syd-pC-scz" firstAttribute="top" secondItem="j9y-Le-GGG" secondAttribute="bottom" constant="16" id="WQV-ux-ccm"/>
                             <constraint firstItem="00z-dz-ePF" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="lv3-Fs-Um5"/>
+                            <constraint firstItem="Syd-pC-scz" firstAttribute="width" secondItem="9Ef-BW-HNx" secondAttribute="width" multiplier="0.4" id="us5-VJ-JWD"/>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="width" secondItem="9Ef-BW-HNx" secondAttribute="width" id="vdH-gT-V1l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hn6-c3-htv"/>
@@ -119,6 +133,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="movieSearchBar" destination="j9y-Le-GGG" id="61L-qE-lFn"/>
+                        <outlet property="searchButton" destination="Syd-pC-scz" id="xji-MP-a6g"/>
                         <segue destination="RBb-v6-JWa" kind="presentation" identifier="showResultsSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="dGl-k6-NYr"/>
                     </connections>
                 </viewController>
