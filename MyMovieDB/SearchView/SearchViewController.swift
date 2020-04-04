@@ -13,7 +13,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var movieSearchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    
     var presenter: SearchViewPresenter?
+    let searchButtonDisabledAlpha: CGFloat = 0.65
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         movieSearchBar.delegate = self
         
         searchButton.isEnabled = false
+        searchButton.alpha = searchButtonDisabledAlpha
         searchButton.layer.cornerRadius = 10
     }
     
@@ -52,6 +55,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         guard let isValid = self.presenter?.isTextValid(text: searchText) else {return}
         if isValid != self.searchButton.isEnabled {
             self.searchButton.isEnabled = isValid
+            self.searchButton.alpha = isValid ? 1.0 : searchButtonDisabledAlpha
         }
     }
     
