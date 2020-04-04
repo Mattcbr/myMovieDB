@@ -13,17 +13,16 @@ import RxCocoa
 
 class ResultsViewController: UICollectionViewController {
     
-    var moviesList: [Movie] = []
     var presenter: ResultsViewPresenter?
     var detailedMovie: DetailedMovie?
     let disposeBag = DisposeBag()
+    var isLoadingData:Bool = true
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter = ResultsViewPresenter(controller: self)
-        setupMoviesObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,40 +31,16 @@ class ResultsViewController: UICollectionViewController {
         presenter?.resetDetailedMovie()
     }
     
-    //MARK: RX
-    func setupMoviesObserver(){
-        RequestManager.sharedInstance.moviesList.asObservable()
-            .subscribe(onNext: {
-                [unowned self] movies in
-                self.moviesList = movies
-                self.collectionView.reloadData()
-            }).disposed(by: disposeBag)
-    }
-    /*
-    func setupCellTapHandling(){
-        self.collectionView.rx.modelSelected(Movie.self).subscribe(onNext:{ [unowned self] movie in
-            if let selectedCellIndexPath = self.collectionView.indexPathsForSelectedItems {
-                let selectedMovie = self.moviesList[selectedCellIndexPath[0].row]
-                self.presenter?.didSelectMovie(movie: selectedMovie)
-            }
-            }).disposed(by: disposeBag)
-    }
-    func setupCellConfiguration() {
-      moviesList
-        .bind(to: self.collectionView
-          .rx
-          .items(cellIdentifier: "MovieCell",
-                 cellType: ResultsViewCell.self)) { row, movie, cell in
-                    cell.movieNameLabel.text = movie.Title
-        }
-        .disposed(by: disposeBag)
-    }*/
-    
     //MARK: Controller
     
     func presentDetailsVC(forMovie movie: DetailedMovie){
         detailedMovie = movie
         self.performSegue(withIdentifier: "movieDetailsSegue", sender: self)
+    }
+    
+    func didupdateMoviesList(){
+        self.collectionView.reloadData()
+        self.isLoadingData = false
     }
     
    // MARK: UICollectionViewDataSource
@@ -75,7 +50,7 @@ class ResultsViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesList.count
+        return presenter?.moviesList.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,16 +58,18 @@ class ResultsViewController: UICollectionViewController {
             fatalError("Not a details cell")
         }
     
-        let movieToDisplay = moviesList[indexPath.row]
-        cell.setup(forMovie:movieToDisplay)
+        if let movieToDisplay = presenter?.moviesList[indexPath.row] {
+            cell.setup(forMovie:movieToDisplay)
+        }
         
         //cell.delegate = self
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMovie = self.moviesList[indexPath.row]
-        self.presenter?.didSelectMovie(movie: selectedMovie)
+        if let selectedMovie = presenter?.moviesList[indexPath.row] {
+            self.presenter?.didSelectMovie(movie: selectedMovie)
+        }
     }
     
     //MARK: Navigation
@@ -102,6 +79,23 @@ class ResultsViewController: UICollectionViewController {
             if let movie = detailedMovie {
                 destinationVc.detailedMovie = movie
             }
+        }
+    }
+    
+    //MARK: Infinite Scroll
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollViewHeight = scrollView.frame.size.height
+        let scrollContentSizeHeight = scrollView.contentSize.height
+        let scrollOffset = scrollView.contentOffset.y
+        
+        let diff = scrollContentSizeHeight - scrollOffset - scrollViewHeight    //This detects if the scroll is near the botom of the scroll view
+        
+        
+        if (diff<30 && !isLoadingData)    //If the scroll is near the bottom, and there is no data being loaded, make a new request.
+        {
+            presenter?.requestMoreMovies()
+            isLoadingData = true
         }
     }
 }

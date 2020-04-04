@@ -34,16 +34,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F0968AD3-902E-4995-B3FA-2F343F21C4D3"
-            shouldBeEnabled = "No"
+            uuid = "F4A9D75B-686D-4E69-B7BC-506B9C62F0A7"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyMovieDB/SearchView/SearchViewController.swift"
+            filePath = "MyMovieDB/Core/RequestManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "requestMovies(withTitle:andPage:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

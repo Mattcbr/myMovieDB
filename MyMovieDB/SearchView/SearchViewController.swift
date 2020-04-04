@@ -24,8 +24,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         presenter = SearchViewPresenter(controller: self)
         movieSearchBar.delegate = self
         
-        searchButton.isEnabled = false
-        searchButton.alpha = searchButtonDisabledAlpha
         searchButton.layer.cornerRadius = 10
     }
     
@@ -33,6 +31,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         shouldShowErrorLabel(status: false)
         self.presenter?.resetMoviesList()
+        
+        searchButton.isEnabled = false
+        searchButton.alpha = searchButtonDisabledAlpha
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,8 +46,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         if let movieToSearch = searchBar.text {
             print("Movie to search: \(movieToSearch)")
             presenter?.searchForMovie(withTitle: movieToSearch)
-        } else {
-            //TODO: Add Warning
         }
     }
     
@@ -63,8 +62,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         if let movieToSearch = movieSearchBar.text {
             print("Movie to search: \(movieToSearch)")
             presenter?.searchForMovie(withTitle: movieToSearch)
-        } else {
-            //TODO: Add Warning
         }
     }
     

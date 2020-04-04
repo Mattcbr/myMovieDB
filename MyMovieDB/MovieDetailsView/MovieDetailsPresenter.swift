@@ -13,21 +13,19 @@ import RxSwift
 class MovieDetailsPresenter {
     var controller: MovieDetailsViewController
     let sharedRequestManager = RequestManager.sharedInstance
-    let disposeBag = DisposeBag()
-    
     
     init(controller: MovieDetailsViewController) {
         self.controller = controller
-//        setupDetailedMovieObserver()
     }
     
-    /*func setupDetailedMovieObserver(){
-        sharedRequestManager.detailedMovie.asObservable()
-        .subscribe(onNext: {
-            [unowned self] detailedMovie in
-            if let movie = detailedMovie {
-                self.controller.detailedMovie = detailedMovie
-            }
-        }).disposed(by: disposeBag)
-    }*/
+    func getImageForDetailedMovie(movie: DetailedMovie){
+        let movieID = movie.imdbID
+        var movieImage = UIImage(named: "appIconDefault")
+        if let moviePoster = sharedRequestManager.imagesDict[movieID] {
+            movieImage = moviePoster
+        }
+        if let image = movieImage {
+            self.controller.setupPosterImageView(withImage: image)
+        }
+    }
 }

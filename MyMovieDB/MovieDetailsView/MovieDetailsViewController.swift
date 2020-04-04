@@ -50,7 +50,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setup(forMovie movie: DetailedMovie){
-        setupImage()
+        self.presenter?.getImageForDetailedMovie(movie: movie)
         setupRatings()
         
         self.navigationItem.title = movie.Title
@@ -75,14 +75,8 @@ class MovieDetailsViewController: UIViewController {
         movieDescriptionLabel.sizeToFit()
     }
     
-    func setupImage(){
-        if let movieID = detailedMovie?.imdbID{
-            if let moviePoster = sharedRequestManager.imagesDict[movieID] {
-                self.moviePosterImageView.image = moviePoster
-            } else {
-                self.moviePosterImageView.image = UIImage(named: "appIconDefault")
-            }
-        }
+    func setupPosterImageView(withImage image: UIImage){
+        self.moviePosterImageView.image = image
     }
     
     func setupRatings(){

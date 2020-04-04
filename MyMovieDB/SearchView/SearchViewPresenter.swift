@@ -19,7 +19,7 @@ class SearchViewPresenter {
     func searchForMovie(withTitle title: String){
         if(self.isTextValid(text: title)){
             let sanitizedString = sanitizeString(text: title)
-            sharedRequestManager.requestMovies(withTitle: sanitizedString)
+            sharedRequestManager.requestMovies(withTitle: sanitizedString, andPage: 1)
             controller.goToResultsScreen()
         } else {
             controller.shouldShowErrorLabel(status: true)
@@ -32,7 +32,9 @@ class SearchViewPresenter {
     }
     
     func sanitizeString(text: String) -> String {
-        return text.trimmingCharacters(in: .whitespacesAndNewlines)
+        var sanitizedString = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        sanitizedString = sanitizedString.replacingOccurrences(of: " ", with: "")
+        return sanitizedString
     }
     
     func resetMoviesList(){

@@ -18,9 +18,15 @@ class RequestManager {
     let moviesList: BehaviorRelay <[Movie]> = BehaviorRelay(value:[])
     let detailedMovie: BehaviorRelay <DetailedMovie?> = BehaviorRelay(value: nil)
     var imagesDict: [String: UIImage] = [:]
+    var lastTitle = String()
     
-    func requestMovies(withTitle title:String) {
-        let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&s=\(title)"
+    func requestMovies(withTitle title:String?, andPage page: Int) {
+        var titleToSearch = lastTitle
+        if let validTitle = title{
+            titleToSearch = validTitle
+            lastTitle = validTitle
+        }
+        let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&s=\(titleToSearch)&page=\(page)"
         
         Alamofire.request(requestURL).responseJSON{ response in
             switch response.result{
@@ -89,6 +95,7 @@ class RequestManager {
     //MARK: Reset
     func resetMoviesList() {
         moviesList.accept([])
+        lastTitle = ""
         resetSelectedMovie()
     }
     
