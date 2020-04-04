@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ulS-Pf-3bI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pKh-QG-dP7">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -90,23 +90,46 @@
             </objects>
             <point key="canvasLocation" x="1338" y="-717"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="R8U-43-752">
+            <objects>
+                <navigationController id="pKh-QG-dP7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UOe-BS-Qey">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ulS-Pf-3bI" kind="relationship" relationship="rootViewController" id="79P-dh-fTR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hK4-pG-S3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-559" y="-717"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="zcs-QP-Cu2">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wqQ-nU-lSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="ulS-Pf-3bI" customClass="SearchViewController" customModule="MyMovieDB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ef-BW-HNx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search for a movie, tv show..." translatesAutoresizingMaskIntoConstraints="NO" id="j9y-Le-GGG">
-                                <rect key="frame" x="0.0" y="400.5" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="422.5" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please add a valid search term" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhP-4O-5H5">
+                                <rect key="frame" x="16" y="392" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIconDefault" translatesAutoresizingMaskIntoConstraints="NO" id="00z-dz-ePF">
-                                <rect key="frame" x="107" y="164.5" width="200" height="200"/>
+                                <rect key="frame" x="107" y="182" width="200" height="200"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syd-pC-scz">
-                                <rect key="frame" x="124" y="472.5" width="166" height="34"/>
+                                <rect key="frame" x="124" y="494.5" width="166" height="34"/>
                                 <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Search">
@@ -119,44 +142,32 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hn6-c3-htv" firstAttribute="trailing" secondItem="mhP-4O-5H5" secondAttribute="trailing" constant="16" id="0Z0-4d-uzj"/>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="centerY" secondItem="hn6-c3-htv" secondAttribute="centerY" id="2g2-FR-rQH"/>
                             <constraint firstItem="Syd-pC-scz" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="Fzn-gi-3Jf"/>
-                            <constraint firstItem="j9y-Le-GGG" firstAttribute="top" secondItem="00z-dz-ePF" secondAttribute="bottom" constant="36" id="Jrx-be-y6l"/>
+                            <constraint firstItem="mhP-4O-5H5" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="JWI-5S-7G9"/>
+                            <constraint firstItem="mhP-4O-5H5" firstAttribute="leading" secondItem="hn6-c3-htv" secondAttribute="leading" constant="16" id="Lv8-iO-NWf"/>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="R4a-AV-EkL"/>
+                            <constraint firstItem="j9y-Le-GGG" firstAttribute="top" secondItem="mhP-4O-5H5" secondAttribute="bottom" constant="10" id="W1s-Nb-qIe"/>
                             <constraint firstItem="Syd-pC-scz" firstAttribute="top" secondItem="j9y-Le-GGG" secondAttribute="bottom" constant="16" id="WQV-ux-ccm"/>
+                            <constraint firstItem="mhP-4O-5H5" firstAttribute="top" secondItem="00z-dz-ePF" secondAttribute="bottom" constant="10" id="cPE-GU-zec"/>
                             <constraint firstItem="00z-dz-ePF" firstAttribute="centerX" secondItem="hn6-c3-htv" secondAttribute="centerX" id="lv3-Fs-Um5"/>
                             <constraint firstItem="Syd-pC-scz" firstAttribute="width" secondItem="9Ef-BW-HNx" secondAttribute="width" multiplier="0.4" id="us5-VJ-JWD"/>
                             <constraint firstItem="j9y-Le-GGG" firstAttribute="width" secondItem="9Ef-BW-HNx" secondAttribute="width" id="vdH-gT-V1l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hn6-c3-htv"/>
                     </view>
+                    <navigationItem key="navigationItem" id="h8x-3U-ogK"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="errorLabel" destination="mhP-4O-5H5" id="lzE-dl-F9u"/>
                         <outlet property="movieSearchBar" destination="j9y-Le-GGG" id="61L-qE-lFn"/>
                         <outlet property="searchButton" destination="Syd-pC-scz" id="xji-MP-a6g"/>
-                        <segue destination="RBb-v6-JWa" kind="presentation" identifier="showResultsSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="dGl-k6-NYr"/>
+                        <segue destination="sms-5g-7KM" kind="show" identifier="showResultsSegue" id="f6H-g1-yTv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wqQ-nU-lSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-357" y="-717"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="PCp-HQ-yEM">
-            <objects>
-                <navigationController wantsFullScreenLayout="YES" id="RBb-v6-JWa" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="eAx-DS-xUS"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="apt-D7-L3j">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="sms-5g-7KM" kind="relationship" relationship="rootViewController" id="ePf-vS-O9p"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4I9-lE-JVh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="561" y="-717"/>
+            <point key="canvasLocation" x="351" y="-717"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="JXp-N7-RYT">

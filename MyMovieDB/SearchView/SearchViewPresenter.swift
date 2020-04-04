@@ -20,6 +20,8 @@ class SearchViewPresenter {
             let sanitizedString = sanitizeString(text: title)
             RequestManager.sharedInstance.requestMovies(withTitle: sanitizedString)
             controller.goToResultsScreen()
+        } else {
+            controller.shouldShowErrorLabel(status: true)
         }
     }
     

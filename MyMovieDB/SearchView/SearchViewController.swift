@@ -12,6 +12,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var movieSearchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
     var presenter: SearchViewPresenter?
     
     //MARK: Lifecycle
@@ -23,6 +24,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchButton.isEnabled = false
         searchButton.layer.cornerRadius = 10
+        
+        shouldShowErrorLabel(status: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     //MARK: Search Bar Delegate
@@ -36,6 +40,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        shouldShowErrorLabel(status: false)
         guard let isValid = self.presenter?.isTextValid(text: searchText) else {return}
         if isValid != self.searchButton.isEnabled {
             self.searchButton.isEnabled = isValid
@@ -54,5 +59,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: Other
     func goToResultsScreen(){
         self.performSegue(withIdentifier: "showResultsSegue", sender: self)
+    }
+    
+    func shouldShowErrorLabel(status: Bool){
+        self.errorLabel.isHidden = !status
     }
 }

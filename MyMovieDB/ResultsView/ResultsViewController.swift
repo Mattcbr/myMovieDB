@@ -26,6 +26,7 @@ class ResultsViewController: UICollectionViewController {
         setupMoviesObserver()
 //        setupCellConfiguration()
 //        setupCellTapHandling()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: RX
