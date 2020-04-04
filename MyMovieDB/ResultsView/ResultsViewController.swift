@@ -60,30 +60,9 @@ class ResultsViewController: UICollectionViewController {
         }
     
         let movieToDisplay = moviesList[indexPath.row]
-        cell.movieNameLabel.text = movieToDisplay.Title
+        cell.setup(forMovie:movieToDisplay)
         
-        /*let placeToDisplay = controller?.placesArray[indexPath.row]
-        if let place = placeToDisplay {
-            cell.setupForPlace(place: place)
-            
-            if (!place.isThumbnailLoaded){
-                controller?.loadImage(forPlace: place, completion: { (newThumbnail) in
-                    place.thumbnail = newThumbnail
-                    place.isThumbnailLoaded = true
-                    cell.placeThumbnail.image = newThumbnail
-                    cell.setupForPlace(place: place)
-                    if(self.controller?.placesArray.first == place && self.favorites == nil){
-                        cell.isBestAround()
-                    }
-                })
-            }
-            
-            if(controller?.placesArray.first == place && favorites == nil){
-                cell.isBestAround()
-            }
-        }
-        
-        cell.delegate = self*/
+        //cell.delegate = self
         return cell
     }
 }

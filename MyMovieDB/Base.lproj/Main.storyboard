@@ -33,7 +33,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="240"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XF4-9H-T1x">
-                                            <rect key="frame" x="0.0" y="168" width="160" height="72"/>
+                                            <rect key="frame" x="0.0" y="168" width="160" height="48"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bUM-bh-C4t">
+                                            <rect key="frame" x="70" y="110" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfg-wz-0jT">
+                                            <rect key="frame" x="0.0" y="216" width="160" height="24"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -42,18 +52,26 @@
                                     </subviews>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="dfg-wz-0jT" firstAttribute="width" secondItem="EjZ-dh-ZTc" secondAttribute="width" id="3D2-AS-mJC"/>
+                                    <constraint firstItem="bUM-bh-C4t" firstAttribute="centerX" secondItem="EjZ-dh-ZTc" secondAttribute="centerX" id="58J-V6-W3o"/>
                                     <constraint firstItem="PVc-dP-Ai2" firstAttribute="centerX" secondItem="EjZ-dh-ZTc" secondAttribute="centerX" id="5S2-eE-buV"/>
                                     <constraint firstItem="PVc-dP-Ai2" firstAttribute="height" secondItem="EjZ-dh-ZTc" secondAttribute="height" id="G67-VC-qNP"/>
-                                    <constraint firstAttribute="bottom" secondItem="XF4-9H-T1x" secondAttribute="bottom" id="LuN-CQ-Vgx"/>
-                                    <constraint firstItem="XF4-9H-T1x" firstAttribute="height" secondItem="EjZ-dh-ZTc" secondAttribute="height" multiplier="0.3" id="Xe5-3F-CCe"/>
+                                    <constraint firstAttribute="bottom" secondItem="dfg-wz-0jT" secondAttribute="bottom" id="WPd-3O-Zz5"/>
+                                    <constraint firstItem="XF4-9H-T1x" firstAttribute="height" secondItem="EjZ-dh-ZTc" secondAttribute="height" multiplier="0.2" id="Xe5-3F-CCe"/>
                                     <constraint firstItem="PVc-dP-Ai2" firstAttribute="centerY" secondItem="EjZ-dh-ZTc" secondAttribute="centerY" id="YDk-JC-tgA"/>
                                     <constraint firstItem="XF4-9H-T1x" firstAttribute="centerX" secondItem="EjZ-dh-ZTc" secondAttribute="centerX" id="cRz-TS-wcB"/>
                                     <constraint firstItem="XF4-9H-T1x" firstAttribute="width" secondItem="EjZ-dh-ZTc" secondAttribute="width" id="ero-ia-Zih"/>
+                                    <constraint firstItem="dfg-wz-0jT" firstAttribute="centerX" secondItem="EjZ-dh-ZTc" secondAttribute="centerX" id="m2r-IQ-i0z"/>
                                     <constraint firstItem="PVc-dP-Ai2" firstAttribute="width" secondItem="EjZ-dh-ZTc" secondAttribute="width" id="mGF-Vh-5KO"/>
+                                    <constraint firstItem="bUM-bh-C4t" firstAttribute="centerY" secondItem="EjZ-dh-ZTc" secondAttribute="centerY" id="mZq-ba-ddW"/>
+                                    <constraint firstItem="dfg-wz-0jT" firstAttribute="top" secondItem="XF4-9H-T1x" secondAttribute="bottom" id="tgp-wl-qfz"/>
+                                    <constraint firstItem="dfg-wz-0jT" firstAttribute="height" secondItem="EjZ-dh-ZTc" secondAttribute="height" multiplier="0.1" id="wgj-WV-vQs"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="loadingActivityIndicator" destination="bUM-bh-C4t" id="Xxk-Uo-xW9"/>
                                     <outlet property="movieNameLabel" destination="XF4-9H-T1x" id="LOb-aH-ZvC"/>
                                     <outlet property="moviePosterImageView" destination="PVc-dP-Ai2" id="tU8-Dk-z1Q"/>
+                                    <outlet property="movieYearLabel" destination="dfg-wz-0jT" id="pjo-Sv-5Yt"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

@@ -75,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1819E024389211006262A4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2FF1917C2437FCCA00AA0D8B /* ResultsViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		2F4D9E1B2437D34A00AF5418 = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +158,8 @@
 		2FF191792437FAC400AA0D8B /* ResultsView */ = {
 			isa = PBXGroup;
 			children = (
+				2F1819E024389211006262A4 /* Cell */,
 				2FF1917A2437FAE500AA0D8B /* ResultsViewController.swift */,
-				2FF1917C2437FCCA00AA0D8B /* ResultsViewCell.swift */,
 			);
 			path = ResultsView;
 			sourceTree = "<group>";
