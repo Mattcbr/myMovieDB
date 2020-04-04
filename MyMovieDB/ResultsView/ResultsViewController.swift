@@ -14,16 +14,21 @@ import RxCocoa
 class ResultsViewController: UICollectionViewController {
     
     var moviesList: [Movie] = []
+    var presenter: ResultsViewPresenter?
+    var detailedMovie: DetailedMovie?
     let disposeBag = DisposeBag()
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.collectionView.dataSource = nil
+        presenter = ResultsViewPresenter(controller: self)
         setupMoviesObserver()
 //        setupCellConfiguration()
+//        setupCellTapHandling()
     }
     
+    //MARK: RX
     func setupMoviesObserver(){
         RequestManager.sharedInstance.MoviesList.asObservable()
             .subscribe(onNext: {
@@ -32,8 +37,16 @@ class ResultsViewController: UICollectionViewController {
                 self.collectionView.reloadData()
             }).disposed(by: disposeBag)
     }
-    
-    /*func setupCellConfiguration() {
+    /*
+    func setupCellTapHandling(){
+        self.collectionView.rx.modelSelected(Movie.self).subscribe(onNext:{ [unowned self] movie in
+            if let selectedCellIndexPath = self.collectionView.indexPathsForSelectedItems {
+                let selectedMovie = self.moviesList[selectedCellIndexPath[0].row]
+                self.presenter?.didSelectMovie(movie: selectedMovie)
+            }
+            }).disposed(by: disposeBag)
+    }
+    func setupCellConfiguration() {
       moviesList
         .bind(to: self.collectionView
           .rx
@@ -43,6 +56,13 @@ class ResultsViewController: UICollectionViewController {
         }
         .disposed(by: disposeBag)
     }*/
+    
+    //MARK: Controller
+    
+    func presentDetailsVC(forMovie movie: DetailedMovie){
+        detailedMovie = movie
+        self.performSegue(withIdentifier: "movieDetailsSegue", sender: self)
+    }
     
    // MARK: UICollectionViewDataSource
 
@@ -64,5 +84,19 @@ class ResultsViewController: UICollectionViewController {
         
         //cell.delegate = self
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = self.moviesList[indexPath.row]
+        self.presenter?.didSelectMovie(movie: selectedMovie)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "movieDetailsSegue"){
+            guard let destinationVc = segue.destination as? MovieDetailsViewController else {return}
+            if let movie = detailedMovie {
+                destinationVc.detailedMovie = movie
+            }
+        }
     }
 }

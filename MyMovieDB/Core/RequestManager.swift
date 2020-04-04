@@ -16,10 +16,11 @@ class RequestManager {
     static let sharedInstance = RequestManager()
     let apiKey = "561efb6a"
     let MoviesList: BehaviorRelay <[Movie]> = BehaviorRelay(value:[])
+    let detailedMovie: BehaviorRelay <DetailedMovie?> = BehaviorRelay(value: nil)
     var imagesDict: [String: UIImage] = [:]
     
     func requestMovies(withTitle title:String) {
-        let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&s=\(title)&plot=full"
+        let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&s=\(title)"
         
         Alamofire.request(requestURL).responseJSON{ response in
             switch response.result{
@@ -33,6 +34,30 @@ class RequestManager {
                     print("Got Movie")
                     let newValue = self.MoviesList.value + searchResults.Search
                     self.MoviesList.accept(newValue)
+                } catch let error {
+                    print(error)
+                }
+            case .failure(let error):
+//                self.delegate?.didFailToLoadPopularMovies(withError: error)
+                print("Error:\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func requestDetails(forMovie movie:Movie) {
+        let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&i=\(movie.imdbID)&plot=full"
+        
+        Alamofire.request(requestURL).responseJSON{ response in
+            switch response.result{
+                
+            case .success(let JSON):
+                do {
+                    print("Got it, JSON:\(JSON)")
+                    guard let data = response.data else {return}
+                    let decoder = JSONDecoder()
+                    let detailedMovie = try decoder.decode(DetailedMovie.self, from: data)
+                    self.detailedMovie.accept(detailedMovie)
+                    print("Got Detailed Movie")
                 } catch let error {
                     print(error)
                 }
