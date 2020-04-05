@@ -65,11 +65,20 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    //MARK: Other
+    //MARK: Navigation
+    
+    /**
+    Shows the results screen
+    */
     func goToResultsScreen(){
         self.performSegue(withIdentifier: "showResultsSegue", sender: self)
     }
     
+    //MARK: Behavior
+    /**
+    This function shows/hides the error label based on the status parameter
+    - Parameter status: The status to decide if the label should be shown.
+    */
     func shouldShowErrorLabel(status: Bool){
         self.errorLabel.isHidden = !status
     }

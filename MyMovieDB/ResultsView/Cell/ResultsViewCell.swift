@@ -17,6 +17,10 @@ class ResultsViewCell: UICollectionViewCell {
     
     var requestManager = RequestManager.sharedInstance
     
+    /**
+    Sets the cell appearance according to a movie.
+    - Parameter movie: The movie for which the cell should be set up.
+    */
     func setup(forMovie movie:Movie){
         loadingActivityIndicator.hidesWhenStopped = true
         loadingActivityIndicator.startAnimating()

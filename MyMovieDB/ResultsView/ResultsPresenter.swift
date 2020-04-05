@@ -18,6 +18,8 @@ class ResultsPresenter {
     let disposeBag = DisposeBag()
     var pageToRequest: Int = 1
     
+    //MARK: Initialization
+    
     init(controller: ResultsViewController) {
         self.controller = controller
         
@@ -27,11 +29,25 @@ class ResultsPresenter {
         setupDetailedMoviesErrorObserver()
     }
     
+    //MARK: Movie Request
+    
+    /**
+    Requests details about a selected movie.
+    - Parameter movie: The movie to request the details.
+    */
     func didSelectMovie(movie: Movie){
         RequestManager.sharedInstance.requestDetails(forMovie: movie)
     }
     
-    //MARK: RX
+    /**
+    Requests more movies with the term that was searched previously.
+    */
+    func requestMoreMovies(){
+        pageToRequest = pageToRequest + 1
+        sharedRequestManager.requestMovies(withTitle: nil, andPage: pageToRequest)
+    }
+    
+    //MARK: RxSwift Observers
     
     func setupMoviesObserver(){
         RequestManager.sharedInstance.moviesList.asObservable()
@@ -76,12 +92,13 @@ class ResultsPresenter {
             }).disposed(by: disposeBag)
     }
     
+    //MARK: Sanitization
+    
+    /**
+    Asks the *requestManager* to reset the detailed movie shown previously.
+    */
     func resetDetailedMovie(){
         sharedRequestManager.resetSelectedMovie()
     }
     
-    func requestMoreMovies(){
-        pageToRequest = pageToRequest + 1
-        sharedRequestManager.requestMovies(withTitle: nil, andPage: pageToRequest)
-    }
 }

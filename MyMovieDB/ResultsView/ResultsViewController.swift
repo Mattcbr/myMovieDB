@@ -31,18 +31,24 @@ class ResultsViewController: UICollectionViewController {
         presenter?.resetDetailedMovie()
     }
     
-    //MARK: Controller
+    //MARK: Movies List Observer
     
-    func presentDetailsVC(forMovie movie: DetailedMovie){
-        detailedMovie = movie
-        self.performSegue(withIdentifier: "movieDetailsSegue", sender: self)
-    }
-    
+    /**
+    Updates the view according to the movies list.
+    */
     func didupdateMoviesList(){
         self.collectionView.reloadData()
         self.isLoadingData = false
     }
     
+    //MARK: Error Handling
+    
+    /**
+    Displays an error alert.
+    - Parameter error: The error to be shown.
+    - Parameter title: The alert's title.
+    - Parameter navigateBack: Indicates if a button to go back in the navigation should be shown.
+    */
     func displayErrorAlert(forError error: RequestError, withTitle title:String, shouldNavigateBack navigateBack:Bool) {
         let alert = UIAlertController(title: title,
                                       message: error.Error,
@@ -81,7 +87,6 @@ class ResultsViewController: UICollectionViewController {
             cell.setup(forMovie:movieToDisplay)
         }
         
-        //cell.delegate = self
         return cell
     }
     
@@ -92,6 +97,16 @@ class ResultsViewController: UICollectionViewController {
     }
     
     //MARK: Navigation
+    
+    /**
+    Prepares the navigation to show the Details View.
+    - Parameter movie: The movie for which the details should be shown.
+    */
+    func presentDetailsVC(forMovie movie: DetailedMovie){
+        detailedMovie = movie
+        self.performSegue(withIdentifier: "movieDetailsSegue", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "movieDetailsSegue"){
             guard let destinationVc = segue.destination as? MovieDetailsViewController else {return}
@@ -109,7 +124,6 @@ class ResultsViewController: UICollectionViewController {
         let scrollOffset = scrollView.contentOffset.y
         
         let diff = scrollContentSizeHeight - scrollOffset - scrollViewHeight    //This detects if the scroll is near the botom of the scroll view
-        
         
         if (diff<30 && !isLoadingData)    //If the scroll is near the bottom, and there is no data being loaded, make a new request.
         {

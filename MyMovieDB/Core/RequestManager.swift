@@ -22,6 +22,13 @@ class RequestManager {
     var imagesDict: [String: UIImage] = [:]
     var lastTitle = String()
     
+    //MARK: Requests
+    
+    /**
+    Gets the movies according to a given term.
+    - Parameter title: The term to search for.
+    - Parameter page: The API's page to request.
+    */
     func requestMovies(withTitle title:String?, andPage page: Int) {
         var titleToSearch = lastTitle
         if let validTitle = title{
@@ -61,6 +68,10 @@ class RequestManager {
         }
     }
     
+    /**
+    Gets the details of a given movie.
+    - Parameter movie: The movie to get the details.
+    */
     func requestDetails(forMovie movie:Movie) {
         let requestURL = "http://www.omdbapi.com/?apikey=\(apiKey)&i=\(movie.imdbID)&plot=full"
         
@@ -93,6 +104,12 @@ class RequestManager {
         }
     }
     
+    /**
+    Gets the image associated to a given movie.
+    - Parameter movie: The movie to get the image.
+    - Parameter completion: The callback called after the retrieval of the image.
+    - Parameter image: The movie's image.
+    */
     func requestImage(forMovie movie: Movie, completion: @escaping (_ image: UIImage) -> Void) {
         if (movie.Poster == "N/A") {
             let defaultImage = UIImage(named: "appIconDefault")
@@ -111,7 +128,11 @@ class RequestManager {
         }
     }
     
-    //MARK: Reset
+    //MARK: Sanitization
+    
+    /**
+    Resets the movies list and the selected movie.
+    */
     func resetMoviesList() {
         moviesList.accept([])
         moviesListRequestError.accept(nil)
@@ -119,6 +140,9 @@ class RequestManager {
         resetSelectedMovie()
     }
     
+    /**
+    Resets the selected movie.
+    */
     func resetSelectedMovie() {
         detailedMovie.accept(nil)
         detailedMovieRequestError.accept(nil)

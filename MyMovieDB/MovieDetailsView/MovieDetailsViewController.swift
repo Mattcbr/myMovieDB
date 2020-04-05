@@ -32,13 +32,7 @@ class MovieDetailsViewController: UIViewController {
     var sharedRequestManager = RequestManager.sharedInstance
     var detailedMovie: DetailedMovie?
     
-    init(){
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +42,12 @@ class MovieDetailsViewController: UIViewController {
         }
     }
     
+    //MARK: View Setup
+    
+    /**
+    Sets the view to show details of a specific movie.
+    - Parameter movie: The movie to be shown.
+    */
     func setup(forMovie movie: DetailedMovie){
         self.presenter?.getImageForDetailedMovie(movie: movie)
         setupRatings()
@@ -74,10 +74,17 @@ class MovieDetailsViewController: UIViewController {
         movieDescriptionLabel.sizeToFit()
     }
     
+    /**
+    Sets the *moviePosterImageView* to show the movie poster.
+    - Parameter image: The movie poster.
+    */
     func setupPosterImageView(withImage image: UIImage){
         self.moviePosterImageView.image = image
     }
     
+    /**
+    Sets the ratings views to show the movie's available ratings.
+    */
     func setupRatings(){
         hideRatingViews()
         guard let movie = detailedMovie else {return}
@@ -109,6 +116,9 @@ class MovieDetailsViewController: UIViewController {
         movieRatingsLabel.sizeToFit()
     }
     
+    /**
+    Hides the rating views.
+    */
     func hideRatingViews(){
         self.IMDBRatingView.isHidden = true
         self.RTRatingView.isHidden = true
