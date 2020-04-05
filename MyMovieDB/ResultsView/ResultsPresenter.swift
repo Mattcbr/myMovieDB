@@ -22,7 +22,9 @@ class ResultsPresenter {
         self.controller = controller
         
         setupMoviesObserver()
+        setupMoviesListErrorObserver()
         setupDetailedMovieObserver()
+        setupDetailedMoviesErrorObserver()
     }
     
     func didSelectMovie(movie: Movie){
@@ -40,14 +42,38 @@ class ResultsPresenter {
             }).disposed(by: disposeBag)
     }
     
+    func setupMoviesListErrorObserver(){
+        sharedRequestManager.moviesListRequestError.asObservable()
+            .subscribe(onNext: {
+                [unowned self] error in
+                if let requestError = error {
+                    self.controller.displayErrorAlert(forError: requestError,
+                                                      withTitle: "Error Requesting Movies List",
+                                                      shouldNavigateBack: true)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func setupDetailedMoviesErrorObserver(){
+        sharedRequestManager.detailedMovieRequestError.asObservable()
+            .subscribe(onNext: {
+                [unowned self] error in
+                if let requestError = error {
+                    self.controller.displayErrorAlert(forError: requestError,
+                                                      withTitle: "Error Requesting Movie Details",
+                                                      shouldNavigateBack: false)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
     func setupDetailedMovieObserver(){
         sharedRequestManager.detailedMovie.asObservable()
-        .subscribe(onNext: {
-            [unowned self] detailedMovie in
-            if let movie = detailedMovie {
-                self.controller.presentDetailsVC(forMovie: movie)
-            }
-        }).disposed(by: disposeBag)
+            .subscribe(onNext: {
+                [unowned self] detailedMovie in
+                if let movie = detailedMovie {
+                    self.controller.presentDetailsVC(forMovie: movie)
+                }
+            }).disposed(by: disposeBag)
     }
     
     func resetDetailedMovie(){

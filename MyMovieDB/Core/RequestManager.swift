@@ -16,7 +16,9 @@ class RequestManager {
     static let sharedInstance = RequestManager()
     let apiKey = "561efb6a"
     let moviesList: BehaviorRelay <[Movie]> = BehaviorRelay(value:[])
+    let moviesListRequestError: BehaviorRelay<RequestError?> = BehaviorRelay(value: nil)
     let detailedMovie: BehaviorRelay <DetailedMovie?> = BehaviorRelay(value: nil)
+    let detailedMovieRequestError: BehaviorRelay<RequestError?> = BehaviorRelay(value: nil)
     var imagesDict: [String: UIImage] = [:]
     var lastTitle = String()
     
@@ -32,19 +34,28 @@ class RequestManager {
             switch response.result{
                 
             case .success(let JSON):
+                let decoder = JSONDecoder()
+                guard let data = response.data else {return}
+                let initialMovieCount = self.moviesList.value.count
                 do {
                     print("Got it, JSON:\(JSON)")
-                    guard let data = response.data else {return}
-                    let decoder = JSONDecoder()
                     let searchResults = try decoder.decode(SearchResults.self, from: data)
                     print("Got Movie")
                     let newValue = self.moviesList.value + searchResults.Search
                     self.moviesList.accept(newValue)
                 } catch let error {
-                    print(error)
+                    print(error.localizedDescription)
+                }
+                
+                if (self.moviesList.value.count == initialMovieCount && page == 1){
+                    do {
+                        let requestError = try decoder.decode(RequestError.self, from: data)
+                        self.moviesListRequestError.accept(requestError)
+                    } catch let error {
+                        print(error.localizedDescription)
+                    }
                 }
             case .failure(let error):
-//                self.delegate?.didFailToLoadPopularMovies(withError: error)
                 print("Error:\(error.localizedDescription)")
             }
         }
@@ -57,18 +68,26 @@ class RequestManager {
             switch response.result{
                 
             case .success(let JSON):
+                guard let data = response.data else {return}
+                let decoder = JSONDecoder()
                 do {
                     print("Got it, JSON:\(JSON)")
-                    guard let data = response.data else {return}
-                    let decoder = JSONDecoder()
                     let detailedMovie = try decoder.decode(DetailedMovie.self, from: data)
                     self.detailedMovie.accept(detailedMovie)
                     print("Got Detailed Movie")
                 } catch let error {
                     print(error)
                 }
+                
+                if (self.detailedMovie.value == nil){
+                    do {
+                        let requestError = try decoder.decode(RequestError.self, from: data)
+                        self.detailedMovieRequestError.accept(requestError)
+                    } catch let error {
+                        print(error.localizedDescription)
+                    }
+                }
             case .failure(let error):
-//                self.delegate?.didFailToLoadPopularMovies(withError: error)
                 print("Error:\(error.localizedDescription)")
             }
         }
@@ -95,11 +114,13 @@ class RequestManager {
     //MARK: Reset
     func resetMoviesList() {
         moviesList.accept([])
+        moviesListRequestError.accept(nil)
         lastTitle = ""
         resetSelectedMovie()
     }
     
     func resetSelectedMovie() {
         detailedMovie.accept(nil)
+        detailedMovieRequestError.accept(nil)
     }
 }

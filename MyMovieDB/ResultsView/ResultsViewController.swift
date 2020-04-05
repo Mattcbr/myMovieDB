@@ -43,6 +43,25 @@ class ResultsViewController: UICollectionViewController {
         self.isLoadingData = false
     }
     
+    func displayErrorAlert(forError error: RequestError, withTitle title:String, shouldNavigateBack navigateBack:Bool) {
+        let alert = UIAlertController(title: title,
+                                      message: error.Error,
+                                      preferredStyle: .alert)
+        
+        let backAction = UIAlertAction(title: "Back", style: .default) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let acceptAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        if(navigateBack){
+            alert.addAction(backAction)
+        } else {
+            alert.addAction(acceptAction)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

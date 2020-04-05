@@ -18,32 +18,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "56A538A1-B04B-4F48-9FF6-6D390062C6DC"
+            uuid = "F07D8CBE-8CB7-40B9-B9EE-0446C8CCC162"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyMovieDB/MovieDetailsView/MovieDetailsViewController.swift"
+            filePath = "MyMovieDB/ResultsView/ResultsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "setup(forMovie:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F4A9D75B-686D-4E69-B7BC-506B9C62F0A7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyMovieDB/Core/RequestManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "requestMovies(withTitle:andPage:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "displayErrorAlert(forError:withTitle:shouldNavigateBack:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
