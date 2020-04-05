@@ -1,5 +1,5 @@
 //
-//  SearchViewPresenter.swift
+//  SearchPresenter.swift
 //  MyMovieDB
 //
 //  Created by Matheus Queiroz on 4/3/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchViewPresenter {
+class SearchPresenter {
     var controller: SearchViewController
     var sharedRequestManager = RequestManager.sharedInstance
     

@@ -14,14 +14,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
-    var presenter: SearchViewPresenter?
+    var presenter: SearchPresenter?
     let searchButtonDisabledAlpha: CGFloat = 0.65
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = SearchViewPresenter(controller: self)
+        presenter = SearchPresenter(controller: self)
         movieSearchBar.delegate = self
         
         searchButton.layer.cornerRadius = 10

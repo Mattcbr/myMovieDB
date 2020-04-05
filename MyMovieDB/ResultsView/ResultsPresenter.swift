@@ -1,5 +1,5 @@
 //
-//  ResultsViewPresenter.swift
+//  ResultsPresenter.swift
 //  MyMovieDB
 //
 //  Created by Matheus Queiroz on 4/4/20.
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class ResultsViewPresenter {
+class ResultsPresenter {
     
     var controller: ResultsViewController
     var moviesList: [Movie] = []
@@ -26,7 +26,6 @@ class ResultsViewPresenter {
     }
     
     func didSelectMovie(movie: Movie){
-        print("Movie Selected")
         RequestManager.sharedInstance.requestDetails(forMovie: movie)
     }
     

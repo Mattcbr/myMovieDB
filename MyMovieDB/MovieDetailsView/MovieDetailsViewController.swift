@@ -41,7 +41,6 @@ class MovieDetailsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        //TODO: Do loader, blur and else here
         super.viewDidLoad()
         self.presenter = MovieDetailsPresenter(controller: self)
         if let movie = detailedMovie{

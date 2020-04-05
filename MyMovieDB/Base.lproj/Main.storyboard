@@ -10,7 +10,7 @@
         <!--Results-->
         <scene sceneID="Q5J-xU-eny">
             <objects>
-                <collectionViewController wantsFullScreenLayout="YES" id="sms-5g-7KM" customClass="ResultsViewController" customModule="MyMovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ResultsViewController" wantsFullScreenLayout="YES" id="sms-5g-7KM" customClass="ResultsViewController" customModule="MyMovieDB" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="fOu-eM-NDX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
         <!--Search View Controller-->
         <scene sceneID="zcs-QP-Cu2">
             <objects>
-                <viewController id="ulS-Pf-3bI" customClass="SearchViewController" customModule="MyMovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="ulS-Pf-3bI" customClass="SearchViewController" customModule="MyMovieDB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ef-BW-HNx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +125,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIconDefault" translatesAutoresizingMaskIntoConstraints="NO" id="00z-dz-ePF">
-                                <rect key="frame" x="7" y="-18" width="400" height="400"/>
+                                <rect key="frame" x="107" y="182" width="200" height="200"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syd-pC-scz">
                                 <rect key="frame" x="124" y="494.5" width="166" height="34"/>

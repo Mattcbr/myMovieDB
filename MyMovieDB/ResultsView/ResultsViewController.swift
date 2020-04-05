@@ -13,7 +13,7 @@ import RxCocoa
 
 class ResultsViewController: UICollectionViewController {
     
-    var presenter: ResultsViewPresenter?
+    var presenter: ResultsPresenter?
     var detailedMovie: DetailedMovie?
     let disposeBag = DisposeBag()
     var isLoadingData:Bool = true
@@ -22,7 +22,7 @@ class ResultsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = ResultsViewPresenter(controller: self)
+        presenter = ResultsPresenter(controller: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

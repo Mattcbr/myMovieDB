@@ -7,7 +7,20 @@
 		<key>MyMovieDB.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>7</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2F4D9E232437D34A00AF5418</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F4D9E392437D34F00AF5418</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
