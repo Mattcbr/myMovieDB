@@ -138,6 +138,7 @@ class RequestManager {
         moviesListRequestError.accept(nil)
         lastTitle = ""
         resetSelectedMovie()
+        imagesDict = [:]
     }
     
     /**
