@@ -58,6 +58,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    //MARK: Action Triggers
+    
     @IBAction func didPressSearchButton(_ sender: Any) {
         if let movieToSearch = movieSearchBar.text {
             print("Movie to search: \(movieToSearch)")
